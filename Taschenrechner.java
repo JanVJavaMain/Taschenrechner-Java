@@ -1,50 +1,64 @@
-/*
- * Autor: Jan V
- * Jahr: 2023
- * Aktuelle Version: 2023, V 1.0
- */
-import java.util.Scanner; // Importieren des Scanner 
+import java.util.Scanner;
 
-public class Taschenrechner {
-    public static void main(String[] args){
-        char operator; // hier kann zwischen +, -, * und / entschieden werden 
-        double zahl1, zahl2, ausgabe; // könnten auch Dezimalzahlen sein mit einer Dezimalstelle
+public class Taschenrechner { 
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        char operator;
+        double zahl1, zahl2, ergebnis, ergebnis2;
 
-        Scanner eingabe = new Scanner(System.in); // Scanner - Implementation
+        System.out.println("Bitte Operator eingeben: (Ausnahmen - s fuer Wurzel / p fuer Potenz - erste Zahl ist Basis, zweite Exponent / l fuer Logarithmus; hier zwei Zahlen eingeben)");
+        operator = sc.next().charAt(0);
+        System.out.println("Bitte erste Zahl eingeben: ");
+        zahl1 = sc.nextDouble();
+        System.out.println("Bitte zweite Zahl eingeben: ");
+        zahl2 = sc.nextDouble();
 
-        System.out.println("Hier Operator wählen: +, -, * oder /");
-        operator = eingabe.next().charAt(0); // liest den Input aus der Konsole für den nächsten Char aus
-        System.out.println("Hier die erste Zahl wählen:");
-        zahl1 = eingabe.nextDouble(); // liest den Inhalt der Konsole für nächste Double aus
-        System.out.println("Hier die zweite Zahl wählen:");
-        zahl2 = eingabe.nextDouble();
-
-        switch(operator){ // Je nach Operator werden versch. Sachen ausgeführt; hier: berechnet
-            case '+': // Addieren
-            ausgabe = zahl1 + zahl2;
-            System.out.println("Das Ergebnis lautet: " + ausgabe);
+        switch(operator) {
+        default: 
+            System.out.println("Keinen validen Operator gegeben.");
             break;
 
-            case '-': // Subtrahieren
-            ausgabe = zahl1 - zahl2;
-            System.out.println("Das Ergebnis lautet: " + ausgabe);
+        case '+':
+            ergebnis = zahl1 + zahl2;
+            System.out.println("Das Ergebnis lautet: " + ergebnis);
             break;
 
-            case '*': // Multiplizieren
-            ausgabe = zahl1 * zahl2;
-            System.out.println("Das Ergebnis lautet: " + ausgabe);
+        case '-':
+            ergebnis = zahl1 - zahl2;
+            System.out.println("Das Ergebnis lautet: " + ergebnis);
+            break;
+        
+        case '*':
+            ergebnis = zahl1 * zahl2;
+            System.out.println("Das Ergebnis lautet: " + ergebnis);
             break;
 
-            case '/': // Dividieren
-            ausgabe = zahl1 / zahl2;
-            System.out.println("Das Ergebnis lautet: " + ausgabe);
-            break; // damit er nicht einfach so weiterrechnet
+        case '/':
+            ergebnis = zahl1 / zahl2;
+            System.out.println("Das Ergebnis lautet: " + ergebnis);
+            break;
 
-            default: // falls kein gültiger Operator eingegeben worden ist
-            System.out.println("Ungültiger Operator!");
+        case 's':
+            ergebnis = Math.sqrt(zahl1);
+            System.out.println("Die Wurzel der ersten Zahl lautet:" + ergebnis);
+            ergebnis2 = Math.sqrt(zahl2);
+            System.out.println("Die Wurzel der zweiten Zahl lautet:" + ergebnis2);
+            break;
+
+        case 'p':
+            ergebnis = Math.pow(zahl1, zahl2);
+            System.out.println("Das Ergebnis lautet: " + ergebnis);
+            break;
+        
+        case 'l':
+            ergebnis = Math.log(zahl1);
+            System.out.println("Der Logarithmus der ersten Zahl lautet:" + ergebnis);
+            ergebnis2 = Math.log(zahl2);
+            System.out.println("Der Logarithmus der zweiten Zahl lautet:" + ergebnis2);
             break;
         }
-        eingabe.close(); // Memory Leak Präventionsmaßnahme
-        System.exit(1); // Java Programm beenden
+
+        sc.close();
+        System.exit(1);
     }
 }
